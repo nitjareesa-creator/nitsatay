@@ -1,39 +1,44 @@
 void ft_print_comb2(void);
+void ft_putchar(char c);
+
+void ft_putchar(char c) {
+    write(1, &c, 1);
+}
+
 void ft_print_comb2(void) {
-    char a = '0';
-    char b;
-    while (a <= '9') {
-        b = '0';
-        while (b <= '9') {
+    int a;
+    int b;
+    char c;
 
-            if (!(a == '9' && b == '9')) {
-                char c = a;
-                char d = b + 1;
-                if (d > '9') {
-                    c++;
-                    d = '0';
-                }
-                while (c <= '9')
-                {
-                    write(1, &a, 1);
-                    write(1, &b, 1);
-                    write(1, " ", 2);
-                }
-                
-                write(1, &c, 1);
-                write(1, &d, 1);
-                if (!(c == '9' && d == '9')) {
-                    write(1, ", ", 2);
-                }
-
+    a = 0;
+    while (a <= 98) {
+        b = a + 1;
+        while (b <= 99) {
+            // พิมพ์ตัวเลขคู่แรก (a) แยกหลักสิบและหลักหน่วย
+            c = (a / 10) + '0'; // แปลงหลักสิบเป็นตัวอักษร
+            ft_putchar(c);
+            c = (a % 10) + '0'; // แปลงหลักหน่วยเป็นตัวอักษร
+            ft_putchar(c);
+            
+            // พิมพ์ช่องว่างคั่นระหว่างสองจำนวน
+            ft_putchar(' ');
+            
+            // พิมพ์ตัวเลขคู่ที่สอง (b) แยกหลักสิบและหลักหน่วย
+            c = (b / 10) + '0'; // แปลงหลักสิบเป็นตัวอักษร
+            ft_putchar(c);
+            c = (b % 10) + '0'; // แปลงหลักหน่วยเป็นตัวอักษร
+            ft_putchar(c);
+            
+            // ถ้านี่ไม่ใช่ตัวสุดท้าย (98 99) ให้พิมพ์ ", " คั่น
+            if (!(a == 98 && b == 99)) {
+                ft_putchar(',');
+                ft_putchar(' ');
             }
             b++;
         }
         a++;
     }
-    write(1, "\n", 1);
-}   
-
+}
 int main()
 {
     ft_print_comb2();
